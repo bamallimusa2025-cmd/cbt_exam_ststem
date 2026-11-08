@@ -1,163 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DUAL SUCCESS CBT</title>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DUAL SUCCESS TAHFEEDH SCHOOL - OGBOMOSO CBT</title>
 <style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#f0f4f0}
-header{background:#0a7a2e;color:#fff;padding:14px;text-align:center}
-header h1{margin:0;font-size:22px}
-header p{margin:2px;font-size:13px}
-.card{max-width:800px;margin:14px auto;background:#fff;padding:18px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-input,select,textarea{width:100%;padding:11px;margin:6px 0;border:1px solid #ccc;border-radius:8px;font-size:15px}
-button{padding:11px 16px;border:0;border-radius:8px;cursor:pointer;font-weight:bold;font-size:15px}
-.btn-green{background:#0a7a2e;color:#fff}
-.btn-dark{background:#222;color:#fff}
-.btn-red{background:#c00;color:#fff}
-.btn-grey{background:#ddd}
-.hidden{display:none}
-.qbtn{width:38px;height:38px;margin:3px;border-radius:6px;background:#eee;border:1px solid #ccc}
-.qbtn.done{background:#0a7a2e;color:#fff}
-.qbtn.current{border:3px solid #ff0}
-.nav{display:flex;justify-content:space-between;margin-top:16px}
-.opt{display:block;background:#f7f7f7;padding:11px;margin:7px 0;border-radius:8px;cursor:pointer;border:1px solid #ddd}
-.opt.sel{background:#d6f5df;border-color:#0a7a2e}
-.timer{font-weight:bold;color:#c00;text-align:right}
-.topbar{display:flex;justify-content:space-between;align-items:center}
-.calc{position:fixed;right:10px;bottom:10px;background:#fff;border:1px solid #ccc;padding:10px;border-radius:10px;width:210px;z-index:99}
-.calc input{text-align:right}
-.calc button{width:45px;margin:2px;background:#eee}
-table{width:100%;border-collapse:collapse;font-size:13px}
-td,th{border:1px solid #ddd;padding:7px;text-align:left}
-</style>
-</head>
-<body>
-<header><h1>DUAL SUCCESS CBT</h1><p>Computer Based Test - JAMB Style</p></header>
+*{box-sizing:border-box;font-family:Arial,sans-serif}body{margin:0;background:#e8f5e9;padding:12px}
+.card{max-width:520px;margin:14px auto;background:#fff;padding:22px;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+h1{color:#0a7a2e;text-align:center;font-size:32px;line-height:1.1;margin:8px 0}
+h2{color:#000;text-align:center;font-size:28px;line-height:1.1;margin:10px 0}
+h3{text-align:center}
+input,select,textarea{width:100%;padding:13px;margin:8px 0;border:1px solid #ccc;border-radius:12px;font-size:16px}
+button{width:100%;padding:14px;margin:7px 0;border:0;border-radius:12px;font-weight:bold;font-size:18px;cursor:pointer}
+.blue{background:#2563eb;color:#fff}.green{background:#0a7a2e;color:#fff}.grey{background:#888;color:#fff}.dark{background:#222;color:#fff}.red{background:#c00;color:#fff}.light{background:#eee;color:#222}.orange{background:#ff7a00;color:#fff}
+.hidden{display:none}.err{color:#c00;text-align:center;font-size:17px}.opt{display:block;background:#f7f7f7;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd;cursor:pointer}.opt.sel{background:#d6f5df;border-color:#0a7a2e}
+.qbtn{width:38px;height:38px;margin:3px;border-radius:6px;background:#eee;border:1px solid #ccc}.qbtn.done{background:#0a7a2e;color:#fff}.qbtn.cur{border:3px solid #ff0}
+.nav{display:flex;gap:10px}.nav button{flex:1}.timer{color:#c00;font-weight:bold;text-align:right}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{border:1px solid #ddd;padding:7px}
+.calc{position:fixed;right:10px;bottom:10px;background:#fff;border:1px solid #ccc;padding:10px;border-radius:10px;width:210px;z-index:99}.calc button{width:45px;margin:2px;background:#eee;color:#000;padding:8px;font-size:15px}
+.uploadBox{border:2px dashed #0a7a2e;padding:14px;border-radius:12px;text-align:center;background:#f0fff4}
+</style></head><body>
 
-<!-- LOGIN -->
-<div id="loginPage" class="card">
-<h2>Welcome - DUAL SUCCESS</h2>
-<p><b>TEACHER LOGIN</b></p>
-<input id="tUser" placeholder="Username - DUAL SUCCESS">
-<input id="tPass" type="password" placeholder="Password - DUAL@2024">
-<button class="btn-green" onclick="teacherLogin()">TEACHER LOGIN</button>
-<hr>
-<p><b>STUDENT LOGIN</b></p>
-<input id="sName" placeholder="Your Full Name">
-<input id="sPass" type="password" placeholder="Password - DUAL@2024">
-<button class="btn-dark" onclick="studentLogin()">STUDENT LOGIN</button>
-<p id="loginMsg" style="color:red"></p>
+<div id="home" class="card">
+<h1>DUAL SUCCESS<br>TAHFEEDH SCHOOL</h1><h2>OGBOMOSO - CBT<br>SYSTEM</h2><br>
+<button class="blue" onclick="show('teacherLogin')">TEACHER LOGIN</button>
+<button class="green" onclick="show('studentLogin')">STUDENT LOGIN - EXAM</button>
 </div>
 
-<!-- TEACHER -->
-<div id="teacherPage" class="card hidden">
-<h2>Teacher Dashboard - HISTORY</h2>
-<button class="btn-grey" onclick="showHistory()">📜 VIEW HISTORY (All Exams & Results)</button>
-<button class="btn-red" onclick="logout()">Logout</button>
-<div id="historyBox" style="margin-top:10px"></div>
-<hr>
-<h3>1. Create Exam</h3>
-<select id="subject">
-<option>ENGLISH LANGUAGE</option><option>MATHEMATICS</option><option>PHYSICS</option><option>CHEMISTRY</option><option>BIOLOGY</option><option>CIVIC EDUCATION</option><option>AGRICULTURAL SCIENCE</option><option>GEOGRAPHY</option><option>ARABIC</option><option>SCIENCE</option><option>ECONOMICS</option><option>GOVERNMENT</option><option>ENGLISH LITERATURE</option><option>CRK / IRS</option><option>HAUSA</option><option>COMPUTER STUDIES</option>
-</select>
-<input id="examTitle" placeholder="Exam Title e.g. Term 1 Test">
-<input id="examTime" type="number" value="30" placeholder="Time in minutes">
-<input id="examPass" placeholder="Exam Password (optional)">
-<h3>2. Add Question One by One</h3>
+<div id="teacherLogin" class="card hidden">
+<h1>DUAL SUCCESS<br>TAHFEEDH SCHOOL</h1><h2>OGBOMOSO - CBT<br>SYSTEM</h2>
+<h3>Teacher Login</h3>
+<input id="tUser" placeholder="Username"><input id="tPass" type="password" placeholder="Password">
+<button class="blue" onclick="teacherLogin()">LOGIN</button>
+<button class="grey" onclick="show('home')">BACK</button><p id="tErr" class="err"></p>
+</div>
+
+<div id="studentLogin" class="card hidden">
+<h1>DUAL SUCCESS<br>TAHFEEDH SCHOOL</h1><h2>OGBOMOSO - CBT<br>SYSTEM</h2>
+<h3>Student Login</h3>
+<input id="sName" placeholder="Full Name"><input id="sNo" placeholder="Exam Number">
+<input id="sPass" type="password" placeholder="Password">
+<p style="font-size:18px;margin:4px 0">Select Subject:</p><select id="sSubject"></select>
+<button class="green" onclick="studentLogin()">START EXAM</button>
+<button class="grey" onclick="show('home')">BACK</button><p id="sErr" class="err"></p>
+</div>
+
+<div id="teacherPage" class="card hidden" style="max-width:800px">
+<h2>Teacher Dashboard</h2>
+<button class="blue" onclick="showHistory()">📜 VIEW HISTORY - All Exams & Results</button>
+<button class="dark" onclick="downloadHistory()">⬇️ DOWNLOAD RESULTS (CSV)</button>
+<button class="orange" onclick="window.print()">🖨️ PRINT RESULTS</button>
+<button class="red" onclick="clearHistory()">🗑️ CLEAR HISTORY</button>
+<button class="grey" onclick="show('home')">Logout</button>
+<div id="historyBox"></div><hr>
+<h3>Create Exam</h3>
+<select id="subject"><option>ENGLISH LANGUAGE</option><option>MATHEMATICS</option><option>PHYSICS</option><option>CHEMISTRY</option><option>BIOLOGY</option><option>CIVIC EDUCATION</option><option>AGRICULTURAL SCIENCE</option><option>GEOGRAPHY</option><option>ARABIC</option><option>SCIENCE</option><option>ECONOMICS</option><option>GOVERNMENT</option><option>LITERATURE</option><option>CRK / IRS</option><option>HAUSA</option><option>COMPUTER STUDIES</option></select>
+<input id="examTitle" placeholder="Exam Title"><input id="examTime" type="number" value="30" placeholder="Time (minutes)">
+<input id="examCode" placeholder="Exam Number - e.g. DS-1234 - Give this to Students">
+<h3>Add Question One by One</h3>
 <textarea id="qText" placeholder="Question"></textarea>
 <input id="optA" placeholder="Option A"><input id="optB" placeholder="Option B"><input id="optC" placeholder="Option C"><input id="optD" placeholder="Option D">
 <select id="correct"><option value="0">Correct = A</option><option value="1">Correct = B</option><option value="2">Correct = C</option><option value="3">Correct = D</option></select>
-<button class="btn-green" onclick="addOne()">+ ADD QUESTION</button>
-<h3>4B. BULK ADD - Paste Many At Once</h3>
-<p style="font-size:13px">Format: Question | A | B | C | D | Correct Letter - daya a layi</p>
-<textarea id="bulk" rows="6" placeholder="What is 2+2? | 2 | 3 | 4 | 5 | C
-Capital of Nigeria? | Lagos | Abuja | Kano | Kaduna | B"></textarea>
-<button class="btn-dark" onclick="bulkAdd()">BULK ADD</button>
+<button class="green" onclick="addOne()">+ ADD QUESTION</button>
+
+<h3>4B. BULK ADD - Paste Many</h3><p style="font-size:13px">Format: Question | A | B | C | D | Correct Letter</p>
+<textarea id="bulk" rows="5" placeholder="What is 2+2? | 2 | 3 | 4 | 5 | C"></textarea>
+<button class="dark" onclick="bulkAdd()">BULK ADD</button>
+
+<h3>4C. UPLOAD QUESTIONS - Upload File 📁</h3>
+<div class="uploadBox">
+<p><b>Upload .txt / .csv File</b><br>Format a kowane layi: Question | A | B | C | D | Correct Letter</p>
+<input type="file" id="fileInput" accept=".txt,.csv" onchange="uploadFile(event)">
+<p id="uploadMsg" style="color:green;font-weight:bold"></p>
+<p style="font-size:12px">Misali a cikin File din:<br>What is 2+2? | 2 | 3 | 4 | 5 | C<br>Capital of Nigeria? | Lagos | Abuja | Kano | Kaduna | B</p>
+<button class="blue" onclick="downloadSample()">⬇️ DOWNLOAD SAMPLE FILE - Ka gani yadda ake rubuta shi</button>
+</div>
+
 <p id="qCount">Questions: 0</p>
-<button class="btn-green" onclick="saveExam()">💾 SAVE EXAM & PUBLISH</button>
+<button class="green" onclick="saveExam()">💾 SAVE EXAM & PUBLISH</button>
 <h3>Saved Exams</h3><div id="examList"></div>
 </div>
 
-<!-- INSTRUCTIONS -->
-<div id="instPage" class="card hidden">
-<h2>INSTRUCTIONS - Read Carefully</h2>
-<p><b>1.</b> This exam has multiple choice questions. Each question has A, B, C, D.</p>
-<p><b>2.</b> Click on your answer to select it. You can change it anytime.</p>
-<p><b>3.</b> Use <b>PREVIOUS</b> to go back and <b>NEXT</b> to go forward.</p>
-<p><b>4.</b> Green box in palette = Answered, White = Not Answered.</p>
-<p><b>5.</b> Use Calculator if needed. Do not refresh or close the page.</p>
-<p><b>6.</b> When you finish, click <b>SUBMIT</b>. You will be asked <b>Are you sure?</b> - Click YES to submit, NO to continue.</p>
-<p><b>7.</b> Your result will show immediately and will be saved in HISTORY.</p>
-<p><b>Time:</b> <span id="instTime"></span> minutes | <b>Subject:</b> <span id="instSub"></span></p>
-<label><input type="checkbox" id="agree"> I have read and understood the instructions</label><br><br>
-<button class="btn-green" onclick="startExam()">NEXT - START EXAM ➡️</button>
+<div id="instPage" class="card hidden" style="max-width:700px">
+<h2>INSTRUCTIONS</h2>
+<p><b>1.</b> This exam has A, B, C, D. Click your answer.</p>
+<p><b>2.</b> Use <b>PREVIOUS</b> to go back, <b>NEXT</b> to go forward.</p>
+<p><b>3.</b> Green box = Answered, White = Not Answered.</p>
+<p><b>4.</b> Use Calculator if needed. Do not refresh.</p>
+<p><b>5.</b> When you finish, click <b>SUBMIT</b>. It will ask <b>Are you sure?</b> - YES to submit, NO to continue.</p>
+<p><b>6.</b> You will NOT see your result. Only Teacher can see it in HISTORY.</p>
+<p><b>Subject:</b> <span id="instSub"></span> | <b>Time:</b> <span id="instTime"></span> mins</p>
+<label><input type="checkbox" id="agree" style="width:auto"> I have read instructions</label><br>
+<button class="green" onclick="startExam()">NEXT - START EXAM ➡️</button>
 </div>
 
-<!-- EXAM -->
-<div id="examPage" class="card hidden">
-<div class="topbar"><b id="examHead"></b><span class="timer" id="timer"></span></div>
-<div id="palette"></div>
-<hr>
-<h3 id="qNo"></h3><p id="qShow" style="font-size:17px"></p>
-<div id="opts"></div>
-<div class="nav">
-<button class="btn-grey" onclick="prevQ()">⬅️ PREVIOUS</button>
-<button class="btn-dark" onclick="nextQ()">NEXT ➡️</button>
-</div>
-<br>
-<button class="btn-red" style="width:100%" onclick="askSubmit()">SUBMIT EXAM</button>
-<button class="btn-grey" onclick="toggleCalc()">🧮 Calculator</button>
+<div id="examPage" class="card hidden" style="max-width:800px">
+<div style="display:flex;justify-content:space-between"><b id="examHead"></b><span class="timer" id="timer"></span></div>
+<div id="palette"></div><hr>
+<h3 id="qNo"></h3><p id="qShow" style="font-size:18px"></p><div id="opts"></div>
+<div class="nav"><button class="light" onclick="prevQ()">⬅️ PREVIOUS</button><button class="dark" onclick="nextQ()">NEXT ➡️</button></div><br>
+<button class="red" onclick="askSubmit()">SUBMIT EXAM</button>
+<button class="light" onclick="toggleCalc()">🧮 Calculator</button>
 </div>
 
-<!-- CONFIRM SUBMIT -->
 <div id="confirmPage" class="card hidden" style="text-align:center">
-<h2>ARE YOU SURE TO SUBMIT EXAM?</h2>
-<p>You cannot change your answers after submitting.</p>
-<p id="confirmInfo"></p>
-<button class="btn-red" onclick="doSubmit()">YES - SUBMIT</button>
-<button class="btn-grey" onclick="backToExam()">NO - CONTINUE EXAM</button>
+<h2>ARE YOU SURE TO SUBMIT EXAM?</h2><p id="confirmInfo"></p>
+<button class="red" onclick="doSubmit()">YES - SUBMIT</button>
+<button class="light" onclick="backToExam()">NO - CONTINUE EXAM</button>
 </div>
 
-<!-- RESULT -->
 <div id="resultPage" class="card hidden" style="text-align:center">
-<h2>RESULT</h2><h1 id="score"></h1><p id="resultDetail"></p>
-<button class="btn-green" onclick="logout()">DONE - GO HOME</button>
+<h2>Exam Submitted!</h2><p>Thank you. Your answers have been sent to the Teacher.</p><p>Only Teacher can view your result.</p>
+<button class="green" onclick="location.reload()">DONE - GO HOME</button>
 </div>
 
-<!-- CALCULATOR -->
-<div id="calcBox" class="calc hidden">
-<input id="calcDisp" readonly><br>
+<div id="calcBox" class="calc hidden"><input id="calcDisp" readonly><br>
 <button onclick="calcAdd('7')">7</button><button onclick="calcAdd('8')">8</button><button onclick="calcAdd('9')">9</button><button onclick="calcAdd('/')">/</button><br>
 <button onclick="calcAdd('4')">4</button><button onclick="calcAdd('5')">5</button><button onclick="calcAdd('6')">6</button><button onclick="calcAdd('*')">x</button><br>
 <button onclick="calcAdd('1')">1</button><button onclick="calcAdd('2')">2</button><button onclick="calcAdd('3')">3</button><button onclick="calcAdd('-')">-</button><br>
 <button onclick="calcAdd('0')">0</button><button onclick="calcAdd('.')">.</button><button onclick="calcEq()">=</button><button onclick="calcAdd('+')">+</button><br>
-<button onclick="document.getElementById('calcDisp').value=''" style="width:100%">CLEAR</button>
-</div>
+<button onclick="document.getElementById('calcDisp').value=''" style="width:100%">CLEAR</button></div>
 
 <script>
 let exams=JSON.parse(localStorage.getItem('ds_exams')||'[]');
 let history=JSON.parse(localStorage.getItem('ds_history')||'[]');
-let tempQs=[]; let curExam=null; let curIdx=0; let answers={}; let timerInt=null; let timeLeft=0; let studentName='';
+let tempQs=[];let curExam=null;let curIdx=0;let answers={};let timerInt=null;let timeLeft=0;let studentName='';
 function saveAll(){localStorage.setItem('ds_exams',JSON.stringify(exams));localStorage.setItem('ds_history',JSON.stringify(history));}
-function teacherLogin(){if(document.getElementById('tUser').value.trim().toUpperCase()==='DUAL SUCCESS'&&document.getElementById('tPass').value==='DUAL@2024'){hideAll();document.getElementById('teacherPage').classList.remove('hidden');renderExams();}else{document.getElementById('loginMsg').innerText='Wrong Teacher Username / Password';}}
-function studentLogin(){let n=document.getElementById('sName').value.trim();let p=document.getElementById('sPass').value;if(!n){document.getElementById('loginMsg').innerText='Enter your name';return;}if(p!=='DUAL@2024'){document.getElementById('loginMsg').innerText='Wrong Student Password';return;}studentName=n;hideAll();let t=document.getElementById('teacherPage');if(exams.length===0){alert('No exam yet. Ask Teacher to create exam.');showLogin();return;}// choose first exam - show list
-let html='<div class="card"><h2>Select Exam</h2>';exams.forEach((e,i)=>{html+=`<button class="btn-green" style="width:100%;margin:5px" onclick="openInst(${i})">${e.subject} - ${e.title} (${e.questions.length} Qs)</button>`});html+='</div>';document.body.insertAdjacentHTML('beforeend',html);window._selDiv=document.body.lastChild;}
-function openInst(i){curExam=exams[i];if(window._selDiv)window._selDiv.remove();hideAll();document.getElementById('instTime').innerText=curExam.time;document.getElementById('instSub').innerText=curExam.subject;document.getElementById('instPage').classList.remove('hidden');}
-function startExam(){if(!document.getElementById('agree').checked){alert('Tick - I have read instructions');return;}hideAll();document.getElementById('examPage').classList.remove('hidden');curIdx=0;answers={};timeLeft=curExam.time*60;document.getElementById('examHead').innerText=curExam.subject+' - '+curExam.title;clearInterval(timerInt);timerInt=setInterval(()=>{timeLeft--;let m=Math.floor(timeLeft/60),s=timeLeft%60;document.getElementById('timer').innerText=m+':'+(s<10?'0':'')+s;if(timeLeft<=0){clearInterval(timerInt);doSubmit();}},1000);renderQ();}
-function renderQ(){let q=curExam.questions[curIdx];document.getElementById('qNo').innerText='Question '+(curIdx+1)+' of '+curExam.questions.length;document.getElementById('qShow').innerText=q.q;let o='';q.opts.forEach((op,i)=>{o+=`<div class="opt ${answers[curIdx]==i?'sel':''}" onclick="pick(${i})">${['A','B','C','D'][i]}. ${op}</div>`});document.getElementById('opts').innerHTML=o;let p='';curExam.questions.forEach((_,i)=>{p+=`<button class="qbtn ${answers[i]!==undefined?'done':''} ${i==curIdx?'current':''}" onclick="goQ(${i})">${i+1}</button>`});document.getElementById('palette').innerHTML=p;}
+function show(id){document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='studentLogin')fillSubjects();}
+function fillSubjects(){let s=document.getElementById('sSubject');if(exams.length===0){s.innerHTML='<option>No exam - Teacher has not created yet</option>';}else{s.innerHTML='';exams.forEach((e,i)=>{s.innerHTML+=`<option value="${i}">${e.subject} - ${e.title}</option>`});}}
+function teacherLogin(){let u=document.getElementById('tUser').value.trim().toUpperCase();let p=document.getElementById('tPass').value.trim();if(u==='DUAL SUCCESS'&&p==='DUAL@2024'){show('teacherPage');renderExams();}else{document.getElementById('tErr').innerText='Wrong Username / Password';}}
+function studentLogin(){let n=document.getElementById('sName').value.trim();let no=document.getElementById('sNo').value.trim();let p=document.getElementById('sPass').value.trim();let err=document.getElementById('sErr');if(!n){err.innerText='Enter Full Name';return;}if(exams.length===0){err.innerText='No exam - Teacher has not created yet';return;}let idx=parseInt(document.getElementById('sSubject').value);let e=exams[idx];if(p!=='DUAL@2024'){err.innerText='Wrong Password';return;}if(no!==e.code){err.innerText='You are not a student! Only Teacher can give you Exam No.';return;}studentName=n;curExam=e;show('instPage');document.getElementById('instSub').innerText=e.subject;document.getElementById('instTime').innerText=e.time;}
+function startExam(){if(!document.getElementById('agree').checked){alert('Tick - I have read instructions');return;}show('examPage');curIdx=0;answers={};timeLeft=curExam.time*60;document.getElementById('examHead').innerText=curExam.subject+' - '+curExam.title;clearInterval(timerInt);timerInt=setInterval(()=>{timeLeft--;let m=Math.floor(timeLeft/60),s=timeLeft%60;document.getElementById('timer').innerText=m+':'+(s<10?'0':'')+s;if(timeLeft<=0){clearInterval(timerInt);doSubmit();}},1000);renderQ();}
+function renderQ(){let q=curExam.questions[curIdx];document.getElementById('qNo').innerText='Question '+(curIdx+1)+' of '+curExam.questions.length;document.getElementById('qShow').innerText=q.q;let o='';q.opts.forEach((op,i)=>{o+=`<div class="opt ${answers[curIdx]==i?'sel':''}" onclick="pick(${i})">${['A','B','C','D'][i]}. ${op}</div>`});document.getElementById('opts').innerHTML=o;let p='';curExam.questions.forEach((_,i)=>{p+=`<button class="qbtn ${answers[i]!==undefined?'done':''} ${i==curIdx?'cur':''}" onclick="goQ(${i})">${i+1}</button>`});document.getElementById('palette').innerHTML=p;}
 function pick(i){answers[curIdx]=i;renderQ();}
 function goQ(i){curIdx=i;renderQ();}
 function prevQ(){if(curIdx>0){curIdx--;renderQ();}}
 function nextQ(){if(curIdx<curExam.questions.length-1){curIdx++;renderQ();}else{askSubmit();}}
-function askSubmit(){let ans=Object.keys(answers).length;document.getElementById('confirmInfo').innerText='You answered '+ans+' of '+curExam.questions.length+' questions.';hideAll();document.getElementById('confirmPage').classList.remove('hidden');}
-function backToExam(){hideAll();document.getElementById('examPage').classList.remove('hidden');}
-function doSubmit(){clearInterval(timerInt);let score=0;curExam.questions.forEach((q,i)=>{if(answers[i]==q.correct)score++;});let rec={student:studentName,subject:curExam.subject,title:curExam.title,score:score,total:curExam.questions.length,date:new Date().toLocaleString()};history.push(rec);saveAll();hideAll();document.getElementById('resultPage').classList.remove('hidden');document.getElementById('score').innerText=score+' / '+curExam.questions.length;document.getElementById('resultDetail').innerText=studentName+' - '+curExam.subject+' - '+rec.date;}
-function addOne(){let q=document.getElementById('qText').value.trim();let a=[document.getElementById('optA').value,document.getElementById('optB').value,document.getElementById('optC').value,document.getElementById('optD').value];if(!q||!a[0]){alert('Enter question and options');return;}tempQs.push({q:q,opts:a,correct:parseInt(document.getElementById('correct').value)});document.getElementById('qCount').innerText='Questions: '+tempQs.length;['qText','optA','optB','optC','optD'].forEach(id=>document.getElementById(id).value='');}
-function bulkAdd(){let lines=document.getElementById('bulk').value.trim().split('\n');let c=0;lines.forEach(l=>{let p=l.split('|');if(p.length>=6){let cor=p[5].trim().toUpperCase();tempQs.push({q:p[0].trim(),opts:[p[1].trim(),p[2].trim(),p[3].trim(),p[4].trim()],correct:['A','B','C','D'].indexOf(cor)});c++;}});document.getElementById('qCount').innerText='Questions: '+tempQs.length;alert(c+' questions added');document.getElementById('bulk').value='';}
-function saveExam(){if(tempQs.length==0){alert('Add questions first');return;}let e={subject:document.getElementById('subject').value,title:document.getElementById('examTitle').value||document.getElementById('subject').value,time:parseInt(document.getElementById('examTime').value)||30,pass:document.getElementById('examPass').value,questions:tempQs};exams.push(e);tempQs=[];saveAll();renderExams();alert('Exam Saved!');document.getElementById('qCount').innerText='Questions: 0';}
-function renderExams(){let h='';exams.forEach((e,i)=>{h+=`<div style="border:1px solid #ddd;padding:8px;margin:5px">${e.subject} - ${e.title} (${e.questions.length} Qs) <button class="btn-red" onclick="delExam(${i})">Delete</button></div>`});document.getElementById('examList').innerHTML=h||'No exam yet';}
-function delExam(i){if(confirm('Delete this exam?')){exams.splice(i,1);saveAll();renderExams();}}
-function showHistory(){let h='<h3>HISTORY - All Results</h3>';if(history.length==0)h+='<p>No history yet</p>';else{h+='<table><tr><th>Student</th><th>Subject</th><th>Score</th><th>Date</th></tr>';history.forEach(r=>{h+=`<tr><td>${r.student}</td><td>${r.subject}</td><td>${r.score}/${r.total}</td><td>${r.date}</td></tr>`});h+='</table>';}h+='<h3>HISTORY - All Exams</h3>';exams.forEach(e=>{h+=`<p>${e.subject} - ${e.title} - ${e.questions.length} Qs</p>`});document.getElementById('historyBox').innerHTML=h;}
-function hideAll(){document.querySelectorAll('.card').forEach(c
+function askSubmit(){let a=Object.keys(answers).length;document.getElementById('confirmInfo').innerText='You answered '+a+' of '+curExam.questions.length+' questions.';show('confirmPage');}
+function backToExam(){show('examPage');}
+function doSubmit(){clearInterval(timerInt);let score=0;curExam.questions.forEach((q,i)=>{if(answers[i]==q.correct)score++;});history.push({student:studentName,subject:curExam.subject,title:curExam.title,score:score,total:curExam.questions.length,examNo:curExam.code,date:new Date().toLocaleString()});saveAll();show('resultPage');}
+function addOne(){let q=document.getElementById('qText').value.trim();let a=[document.getElementById('optA').value,document.getElementById('optB').value,document.getElementById('optC').value,document.getElementById('optD').value];if(!q||!a[0]){alert('Enter question');return;}tempQs.push({q:q,opts:a,correct:parseInt(document.getElementById('correct').value)});document.getElementById('qCount').innerText='Questions: '+tempQs.length;['qText','optA','optB','optC','optD'].forEach(id=>document.getElementById(id).value='');}
+function parseLines(text){let lines=text.split('\n');let c=0;lines.forEach(l=>{let p=l.split('|');if(p.length>=6&&p[0].trim()){tempQs.push({q:p[0].trim(),opts:[p[1].trim(),p[2].trim(),p[3].trim(),p[4].trim()],correct:['A','B','C','D'].indexOf(p[5].trim().toUpperCase())});c++;}});return c;}
+function bulkAdd(){let c=parseLines(document.getElementById('bulk').value);document.getElementById('qCount').innerText='Questions: '+tempQs.length;alert(c+' added');document.getElementById('bulk').value='';}
+function uploadFile(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(){let c=parseLines(r.result);document.getElementById('qCount').innerText='Questions: '+tempQs.length;document.getElementById('uploadMsg').innerText=c+' questions uploaded from '+f.name+'!';};r.readAsText(f);}
+function downloadSample(){let s='What is 2+2? | 2 | 3 | 4 | 5 | C\nCapital of Nigeria? | Lagos | Abuja | Kano | Kaduna | B\nWhat is H2O? | Salt | Water | Air | Fire | B';let b=new Blob([s],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='sample-questions.txt';a.click();}
+function saveExam(){if(tempQs.length==0){alert('Add questions first');return;}let code=document.getElementById('examCode').value.trim()||('DS-'+Math.floor(1000+Math.random()*9000));let e={subject:document.getElementById('subject').value,title:document.getElementById('examTitle').value||document.getElementById('subject').value,time:parseInt(document.getElementById('examTime').value)||30,code:code,questions:tempQs};exams.push(e);tempQs=[];saveAll();renderExams();alert('Exam Saved! Exam Number = '+code+' - Give it to Students!');document.getElementById('qCount').innerText='Questions: 0';}
+function renderExams(){let h='';exams.forEach((e,i)=>{h+=`<div style="border:1px solid #ddd;padding:8px;margin:5px">${e.subject} - ${e.title} (${e.questions.length} Qs) - Exam No: <b>${e.code}</b> <button class="red" onclick="delExam(${i})" style="width:auto;padding:6px">Delete</button></div>`});document.getElementById('examList').innerHTML=h||'No exam yet';}
+function delExam(i){if(confirm('Delete?')){exams.splice(i,1);saveAll();renderExams();}}
+function showHistory(){let h='<h3>HISTORY - All Results (Teacher Only)</h3>';if(history.length==0)h+='<p>No history yet</p>';else{h+='<table><tr><th>Student</th><th>Subject</th><th>Score</th><th>Exam No</th><th>Date</th></tr>';history.forEach(r=>{h+=`<tr><td>${r.student}</td><td>${r.subject}</td><td>${r.score}/${r.total}</td><td>${r.examNo}</td><td>${r.date}</td></tr>`});h+='</table>';}h+='<h3>HISTORY - All Exams</h3>';exams.forEach(e=>{h+=`<p>${e.subject} - ${e.title} - ${e.questions.length} Qs - No: ${e.code}</p>`});document.getElementById('historyBox').innerHTML=h;}
+function downloadHistory(){if(history.length==0){alert('No history yet');return;}let csv='Student,Subject,Title,Score,Total,Exam No,Date\n';history.forEach(r=>{csv+=`"${r.student}","${r.subject}","${r.title}",${r.score},${r.total},"${r.examNo}","${r.date}"\n`});let b=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='Dual-Success-Results.csv';a.click();}
+function clearHistory(){if(confirm('Clear all History?')){history=[];saveAll();showHistory();}}
+function toggleCalc(){document.getElementById('calcBox').classList.toggle('hidden');}
+function calcAdd(v){document.getElementById('calcDisp').value+=v;}
+function calcEq(){try{document.getElementById('calcDisp').value=eval(document.getElementById('calcDisp').value);}catch(e){document.getElementById('calcDisp').value='Error';}}
+</script></body></html>
