@@ -1,65 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DUAL SUCCESS CBT</title>
+<title>DUAL SUCCESS TAHFEEDH SCHOOL - CBT</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f0f2f5}header{background:#0b2a4a;color:#fff;padding:18px;text-align:center}
-.wrap{max-width:900px;margin:16px auto;padding:0 12px}.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:14px}
-h2{margin:0 0 10px;color:#0b2a4a}h3{margin:14px 0 8px;color:#0b2a4a}label{font-weight:700;font-size:13px;display:block;margin-top:10px}
-input,select,textarea{width:100%;padding:11px;border:1px solid #ccc;border-radius:10px;margin-top:4px;font-size:15px}textarea{min-height:90px}
-button{border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer;font-size:15px}.btn-blue{background:#0b5ed7;color:#fff}.btn-green{background:#198754;color:#fff}.btn-red{background:#dc3545;color:#fff}.btn-orange{background:#fd7e14;color:#fff}.btn-grey{background:#e9ecef}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
-.qbox{border:1px solid #ddd;border-radius:12px;padding:12px;margin-top:10px}.opt{display:flex;gap:8px;align-items:center;margin-top:6px}.opt input[type=text]{flex:1}.small{font-size:13px;color:#555}
-.timer{position:sticky;top:0;background:#dc3545;color:#fff;padding:10px;text-align:center;font-weight:900;font-size:18px;border-radius:10px}.hidden{display:none}.ok{color:#198754;font-weight:800}.bad{color:#dc3545;font-weight:800}
-table{width:100%;border-collapse:collapse;font-size:14px}th,td{border:1px solid #ddd;padding:8px;text-align:left}.open{color:#198754}.closed{color:#dc3545}
-</style></head><body>
-<header><h1>DUAL SUCCESS CBT - OGBOMOSO</h1><p>Teacher Controls Start • 1 Student = 1 Subject • No Result For Student</p></header>
-<div class="wrap">
-<div class="card" id="loginCard"><h2>Login</h2><div class="row"><button class="btn-blue" onclick="showTab('teacher')">I'M TEACHER</button><button class="btn-green" onclick="showTab('student')">I'M STUDENT</button></div>
-<div id="teacherTab" class="hidden"><h3>Teacher Login</h3><label>Password</label><input id="tPass" type="password" placeholder="DUAL@2024"><button class="btn-blue" style="margin-top:10px;width:100%" onclick="teacherLogin()">LOGIN AS TEACHER →</button></div>
-<div id="studentTab" class="hidden"><h3>Student Login</h3><label>Full Name (As Teacher Added)</label><input id="sName" placeholder="e.g. Musa Bamalli"><label>Exam Number</label><input id="sExam" placeholder="DS-1234"><label>Exam Password</label><input id="sPass" type="password" placeholder="DUAL@2024"><button class="btn-green" style="margin-top:10px;width:100%" onclick="studentLogin()">START EXAM →</button><p class="small">Teacher must OPEN exam first. One student = One exam only. After submit, you cannot retake until Teacher deletes your result.</p></div></div>
-
-<div class="card hidden" id="teacherDash">
-<h2>Teacher Dashboard</h2>
-<div class="row"><button class="btn-blue" onclick="showHistory()">👁️ VIEW HISTORY</button><button class="btn-orange" onclick="downloadCSV()">⬇️ DOWNLOAD</button><button class="btn-grey" onclick="window.print()">🖨️ PRINT</button><button class="btn-red" onclick="clearHistory()">🗑️ CLEAR ALL</button></div>
-<div id="histBox" class="hidden" style="margin-top:12px;overflow:auto"></div>
-
-<h3>🔐 EXAM CONTROL - TEACHER MUST ALLOW START</h3>
-<div class="row"><button class="btn-green" onclick="setOpen(true)">✅ ALLOW TO START EXAM - OPEN</button><button class="btn-red" onclick="setOpen(false)">🔒 CLOSE EXAM - STOP STUDENTS</button></div>
-<p id="openStatus" class="bad">Status: CLOSED - Students CANNOT login now</p>
-<p class="small">Ka danna ALLOW TO START - sannan Students zasu iya login. Idan ka danna CLOSE - babu Student da zai iya shiga.</p>
-
-<h3>1. SET EXAM - SET TIME - SET MARKS - ADD STUDENTS</h3>
-<label>Exam Title / Subject</label><input id="examTitle" placeholder="ENGLISH - JSS2">
-<label>Exam Number</label><input id="examNo" placeholder="DS-1234">
-<div class="row"><div><label>⏰ SET TIME - Minutes</label><input id="examTime" type="number" value="30"></div><div><label>⭐ MARKS PER QUESTION</label><input id="marksPerQ" type="number" value="2"></div></div>
-<label>Exam Password</label><input id="examPass" value="DUAL@2024">
-<label>👥 ADD STUDENTS - One Per Line</label><textarea id="allowedStudents" placeholder="Musa Bamalli&#10;Aisha Abdullahi&#10;John Okafor"></textarea>
-
-<h3>2. ADD QUESTIONS</h3><div id="qList"></div><button class="btn-grey" onclick="addQ()">+ ADD QUESTION</button>
-<h3>3. BULK ADD</h3><textarea id="bulkBox" placeholder="Q: What is 2+2? | A: 3 | B: 4* | C: 5 | D: 6"></textarea><button class="btn-blue" onclick="bulkAdd()">ADD BULK</button>
-<h3>4. UPLOAD FILE</h3><input type="file" id="fileUp" accept=".txt,.csv"><button class="btn-blue" onclick="uploadFile()">UPLOAD</button>
-<button class="btn-green" style="width:100%;margin-top:14px;padding:14px" onclick="publishExam()">✅ SAVE EXAM & PUBLISH</button>
-<p id="pubMsg" class="ok"></p><button class="btn-red" style="width:100%;margin-top:8px" onclick="location.reload()">LOGOUT</button>
-</div>
-
-<div class="card hidden" id="studentExam"><div class="timer" id="timerBox">⏰ Time Left</div><h2 id="stuExamTitle"></h2><p><b>Name:</b> <span id="stuNameShow"></span> • <b>Exam:</b> <span id="stuExamShow"></span> • <b>Marks/Q:</b> <span id="stuMarksShow"></span></p><div id="stuQs"></div><button class="btn-green" style="width:100%;padding:14px" onclick="submitExam()">SUBMIT →</button></div>
-<div class="card hidden" id="doneBox"><h2>✅ Exam Submitted!</h2><p>Thank you <b id="doneName"></b>. Sent to Teacher.</p><p class="bad">You cannot see result. Only Teacher can view. You cannot retake until Teacher deletes your result.</p><button class="btn-blue" onclick="location.reload()">BACK</button></div>
-</div>
-<script>
-let questions=[],timerInt=null,timeLeft=0,curExam=null,curStudent='',curNo='';
-let exams=JSON.parse(localStorage.getItem('ds_exams')||'{}');
-let results=JSON.parse(localStorage.getItem('ds_results')||'[]');
-function showTab(t){document.getElementById('teacherTab').classList.toggle('hidden',t!=='teacher');document.getElementById('studentTab').classList.toggle('hidden',t!=='student');}
-function teacherLogin(){if(document.getElementById('tPass').value==='DUAL@2024'){document.getElementById('loginCard').classList.add('hidden');document.getElementById('teacherDash').classList.remove('hidden');addQ();}else alert('Wrong Password');}
-function addQ(q){questions.push(q||{q:'',a:'',b:'',c:'',d:'',ans:'B'});renderQs();}
-function renderQs(){let h='';questions.forEach((qq,i)=>{h+=`<div class="qbox"><b>Q${i+1}</b> <button onclick="questions.splice(${i},1);renderQs()" style="float:right;background:#dc3545;color:#fff;padding:6px 10px">Delete</button><input placeholder="Question" value="${qq.q.replace(/"/g,'')}" oninput="questions[${i}].q=this.value"><div class="opt">A <input value="${qq.a}" oninput="questions[${i}].a=this.value"></div><div class="opt">B <input value="${qq.b}" oninput="questions[${i}].b=this.value"></div><div class="opt">C <input value="${qq.c}" oninput="questions[${i}].c=this.value"></div><div class="opt">D <input value="${qq.d}" oninput="questions[${i}].d=this.value"></div><label>Correct</label><select onchange="questions[${i}].ans=this.value"><option ${qq.ans=='A'?'selected':''}>A</option><option ${qq.ans=='B'?'selected':''}>B</option><option ${qq.ans=='C'?'selected':''}>C</option><option ${qq.ans=='D'?'selected':''}>D</option></select></div>`});document.getElementById('qList').innerHTML=h;}
-function bulkAdd(){let lines=document.getElementById('bulkBox').value.split('\n');lines.forEach(l=>{if(!l.trim())return;let p=l.split('|');let q={q:p[0].replace('Q:','').trim(),a:'',b:'',c:'',d:'',ans:'B'};p.slice(1).forEach(x=>{let k=x.trim().charAt(0);let v=x.replace(/^[A-D]:/,'').replace('*','').trim();if(k=='A')q.a=v;if(k=='B')q.b=v;if(k=='C')q.c=v;if(k=='D')q.d=v;if(x.includes('*'))q.ans=k;});questions.push(q);});renderQs();alert('Bulk Added');}
-function uploadFile(){let f=document.getElementById('fileUp').files[0];if(!f)return alert('Choose file');let r=new FileReader();r.onload=e=>{document.getElementById('bulkBox').value=e.target.result;bulkAdd();};r.readAsText(f);}
-function publishExam(){let no=document.getElementById('examNo').value.trim();if(!no)return alert('Put Exam Number');let students=document.getElementById('allowedStudents').value.split('\n').map(s=>s.trim().toLowerCase()).filter(Boolean);if(questions.length==0)return alert('Add question');exams[no]={title:document.getElementById('examTitle').value||'Exam',time:parseInt(document.getElementById('examTime').value)||30,marks:parseInt(document.getElementById('marksPerQ').value)||2,pass:document.getElementById('examPass').value||'DUAL@2024',students:students,qs:questions,open:false};localStorage.setItem('ds_exams',JSON.stringify(exams));document.getElementById('pubMsg').textContent='✅ Published! Exam '+no+' is CLOSED. Click ALLOW TO START EXAM to open it.';document.getElementById('openStatus').textContent='Status: CLOSED - Students CANNOT login now';}
-function setOpen(v){let no=document.getElementById('examNo').value.trim();if(!no||!exams[no])return alert('First SAVE EXAM & PUBLISH, then click ALLOW');exams[no].open=v;localStorage.setItem('ds_exams',JSON.stringify(exams));let s=document.getElementById('openStatus');if(v){s.textContent='Status: ✅ OPEN - Students CAN login now for '+no;s.className='ok';alert('✅ EXAM OPENED! Students can login now for '+no);}else{s.textContent='Status: 🔒 CLOSED - Students CANNOT login';s.className='bad';alert('Exam Closed');}}
-function studentLogin(){let name=document.getElementById('sName').value.trim();let no=document.getElementById('sExam').value.trim();let pass=document.getElementById('sPass').value;let ex=exams[no];if(!ex)return alert('Exam Not Found');if(!ex.open)return alert('⛔ Teacher has NOT yet Allowed To Start Exam. Wait for Teacher to click ALLOW TO START.');if(ex.pass!==pass)return alert('Wrong Password');if(ex.students&&ex.students.length>0&&!ex.students.includes(name.toLowerCase()))return alert('⛔ Your Name NOT in Teacher List');let already=results.find(r=>r.name.toLowerCase()===name.toLowerCase()&&r.exam===no);if(already)return alert('⛔ You already did this Exam. Ask Teacher to DELETE your result to allow you to retake.');curExam=ex;curStudent=name;curNo=no;document.getElementById('loginCard').classList.add('hidden');document.getElementById('studentExam').classList.remove('hidden');document.getElementById('stuExamTitle').textContent=ex.title;document.getElementById('stuNameShow').textContent=name;document.getElementById('stuExamShow').textContent=no;document.getElementById('stuMarksShow').textContent=ex.marks;let h='';ex.qs.forEach((qq,i)=>{h+=`<div class="qbox"><b>Q${i+1}. ${qq.q}</b><br><label><input type="radio" name="q${i}" value="A"> A. ${qq.a}</label><label><input type="radio" name="q${i}" value="B"> B. ${qq.b}</label><label><input type="radio" name="q${i}" value="C"> C. ${qq.c}</label><label><input type="radio" name="q${i}" value="D"> D. ${qq.d}</label></div>`});document.getElementById('stuQs').innerHTML=h;timeLeft=ex.time*60;clearInterval(timerInt);timerInt=setInterval(()=>{timeLeft--;let m=Math.floor(timeLeft/60),s=timeLeft%60;document.getElementById('timerBox').textContent='⏰ Time Left: '+m+':'+(s<10?'0':'')+s;if(timeLeft<=0){clearInterval(timerInt);submitExam(true);}},1000);}
-function submitExam(auto){clearInterval(timerInt);let correct=0;curExam.qs.forEach((qq,i)=>{let sel=document.querySelector('input[name="q'+i+'"]:checked');if(sel&&sel.value===qq.ans)correct++;});let score=correct*curExam.marks;let total=curExam.qs.length*curExam.marks;results.push({name:curStudent,exam:curNo,score:score+'/'+total,correct:correct+'/'+curExam.qs.length,date:new Date().toLocaleString()});localStorage.setItem('ds_results',JSON.stringify(results));document.getElementById('studentExam').classList.add('hidden');document.getElementById('doneBox').classList.remove('hidden');document.getElementById('doneName').textContent=curStudent;if(auto)alert('Time Up! Auto Submitted.');}
-function showHistory(){let b=document.getElementById('histBox');b.classList.toggle('hidden');if(!results.length){b.innerHTML='<p>No results yet</p>';return;}let h='<table><tr><th>Name</th><th>Exam</th><th>Score</th><th>Correct</th><th>Date</th><th>Action</th></tr>';results.forEach((r,i)=>{h+=`<tr><td>${r.name}</td><td>${r.exam}</td><td>${r.score}</td><td>${r.correct}</td><td>${r.date}</td><td><button onclick="deleteOne(${i})" style="background:#dc3545;color:#fff;padding:6px 10px">DELETE - ALLOW RETAKE</button></td></tr>`});h+='</table><p class="small">DELETE = Goge Result - Student zai iya sake yin Exam din</p>';b.innerHTML=h;}
-function deleteOne(i){if(confirm('Delete result of '+results[i].name+'? He can retake now.')){results.splice(i,1);localStorage.setItem('ds_results',JSON.stringify(results));showHistory();showHistory();alert('Deleted! Student can login again now.');}}
-function downloadCSV(){if(!results.length)return alert('No results');let csv='Name,Exam,Score,Correct,Date\n';results.forEach(r=>{csv+=`"${r.name}",${r.exam},${r.score},${r.correct},"${r.date}"\n`});let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='results.csv';a.click();}
-function clearHistory(){if(confirm('Clear all?')){results=[];localStorage.setItem('ds_results','[]');alert('Cleared');}}
-</script></body></html>
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#d9e9d9;color:#111}
+.wrap{max-width:900px;margin:16px auto;padding:0 12px}
+.card{background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 20px rgba(0,0,0,.08);margin-bottom:14px}
+h2{margin:0 0 10px;color:#0a6b33}h3{margin:14px 0 8px;color:#0a6b33}
+.top-title{text-align:center;color:#0a6b33;font-size:34px;font-weight:900;line-height:1.1;margin:0}
+.top-sub{text-align:center;color:#000;font-size:30px;font-weight:900;line-height:1.1;margin:10px 0 20px}
+label{font-weight:700;font-size:13px;display:block;margin-top:10px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:10
